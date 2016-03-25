@@ -1,6 +1,8 @@
 package middlewares
 
 import (
+  "net/http"
+  "strings"
   "github.com/gin-gonic/gin"
   "github.com/jrevillas/pkmnrequiem-go/models"
   "gopkg.in/mgo.v2"
@@ -28,4 +30,13 @@ func (s *Session) Auth(c *gin.Context) {
 
 func (s *Session) Guest(c *gin.Context) {
   return nil
+}
+
+func retrieveToken(c *gin.Context) string {
+  authHeader := c.Request.Header.Get(AuthKey)
+  if authHeader != "" {
+    parts := strings.SplitN(authHeader, " ", 1)
+    return parts[len(parts) - 1]
+  }
+  return authHeader
 }
