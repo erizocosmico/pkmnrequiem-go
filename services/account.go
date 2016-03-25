@@ -5,6 +5,7 @@ import (
   "github.com/gin-gonic/gin"
   "github.com/jrevillas/pkmnrequiem-go/middlewares"
   "github.com/jrevillas/pkmnrequiem-go/models"
+  "gopkg.in/mgo.v2"
 )
 
 type AccountService struct {
