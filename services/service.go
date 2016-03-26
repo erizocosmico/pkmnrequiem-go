@@ -2,7 +2,7 @@ package services
 
 import "github.com/gin-gonic/gin"
 
-type Service struct {
+type Service interface {
   Register(*gin.RouterGroup)
 }
 
