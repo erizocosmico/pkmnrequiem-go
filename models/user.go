@@ -17,7 +17,7 @@ type UserStore struct {
   *mgo.Database
 }
 
-func (s UserStore) ByToken(token string) (*User, err) {
+func (s UserStore) ByToken(token string) (*User, error) {
   return nil, nil
 }
 
