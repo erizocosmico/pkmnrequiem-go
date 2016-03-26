@@ -5,8 +5,8 @@ import (
   "log"
   "os"
   "github.com/gin-gonic/gin"
-  "github.com/jrevillas/pkmnrequiem/models"
-  "github.com/jrevillas/pkmnrequiem/services"
+  "github.com/jrevillas/pkmnrequiem-go/models"
+  "github.com/jrevillas/pkmnrequiem-go/services"
   "gopkg.in/mgo.v2"
 )
 
