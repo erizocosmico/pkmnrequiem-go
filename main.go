@@ -1,11 +1,9 @@
 package main
 
 import (
-  "errors"
   "log"
   "os"
   "github.com/gin-gonic/gin"
-  "github.com/jrevillas/pkmnrequiem-go/models"
   "github.com/jrevillas/pkmnrequiem-go/services"
   "gopkg.in/mgo.v2"
 )
@@ -22,7 +20,7 @@ func main() {
     log.Fatal(err)
   }
   router := gin.Default()
-  v1 := r.Group("v1")
+  v1 := router.Group("v1")
   services.Services{
     services.NewAccountService(db),
   }.Register(v1)
