@@ -17,6 +17,10 @@ type UserStore struct {
   *mgo.Database
 }
 
+func (s UserStore) ByToken(token string) (*User, err) {
+  return nil, nil
+}
+
 func NewUser(email, password, username string) *User {
   encrypted, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
   if err != nil {

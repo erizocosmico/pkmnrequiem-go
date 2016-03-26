@@ -1,6 +1,7 @@
 package middlewares
 
 import (
+  "log"
   "net/http"
   "strings"
   "github.com/gin-gonic/gin"
@@ -32,7 +33,7 @@ func (s *Session) Auth(c *gin.Context) {
   }
   user, err := s.store.ByToken(token)
   if err != nil {
-    log.Err(err)
+    log.Fatal(err)
     c.AbortWithStatus(http.StatusInternalServerError)
     return
   }
