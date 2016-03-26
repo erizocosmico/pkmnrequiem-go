@@ -10,6 +10,7 @@ import (
 
 type AccountService struct {
   *middlewares.Session
+  collection *mgo.Collection
   store *models.UserStore
 }
 
@@ -23,9 +24,9 @@ func NewAccountService(db *mgo.Database) *AccountService {
 
 func (a *AccountService) Register(r *gin.RouterGroup) {
   group := r.Group("/account")
-  g.POST("/create", a.Guest, a.Create)
-  // g.POST("/login", a.Guest, a.Login)
-  // g.POST("/logout", a.Auth, a.Logout)
+  group.POST("/create", a.Guest, a.Create)
+  // group.POST("/login", a.Guest, a.Login)
+  // group.POST("/logout", a.Auth, a.Logout)
 }
 
 func (a *AccountService) Create(c *gin.Context) {
