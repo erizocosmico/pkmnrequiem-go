@@ -25,11 +25,32 @@ func NewSession(db *mgo.Database) *Session {
 }
 
 func (s *Session) Auth(c *gin.Context) {
-  return nil
+  token := retrieveToken(c)
+  if token == "" {
+    c.AbortWithStatus(http.StatusUnauthorized)
+    return
+  }
+  user, err := s.store.ByToken(token)
+  if err != nil {
+    log.Err(err)
+    c.AbortWithStatus(http.StatusInternalServerError)
+    return
+  }
+  if user == nil {
+    c.AbortWithStatus(http.StatusUnauthorized)
+    return
+  }
+  c.Set(TokenKey, token)
+  c.Set(UserKey, user)
+  c.Next()
 }
 
 func (s *Session) Guest(c *gin.Context) {
-  return nil
+  if retrieveToken(c) != "" {
+    c.AbortWithStatus(http.StatusUnauthorized)
+    return
+  }
+  c.Next()
 }
 
 func retrieveToken(c *gin.Context) string {
