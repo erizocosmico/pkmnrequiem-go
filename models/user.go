@@ -13,6 +13,10 @@ type User struct {
   Username string `json:"username"`
 }
 
+type UserStore struct {
+  *mgo.Database
+}
+
 func NewUser(email, password, username string) *User {
   encrypted, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
   if err != nil {
