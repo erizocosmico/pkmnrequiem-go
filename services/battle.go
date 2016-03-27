@@ -3,7 +3,7 @@ package services
 import (
   // "net/http"
   "github.com/gin-gonic/gin"
-  "github.com/jrevillas/middlewares"
+  "github.com/jrevillas/pkmnrequiem-go/middlewares"
   "github.com/satori/go.uuid"
   "gopkg.in/mgo.v2"
   // "gopkg.in/mgo.v2/bson"
