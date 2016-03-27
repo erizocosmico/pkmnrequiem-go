@@ -1,7 +1,7 @@
 package services
 
 import (
-  // "net/http"
+  "net/http"
   "github.com/gin-gonic/gin"
   "github.com/jrevillas/pkmnrequiem-go/middlewares"
   "github.com/satori/go.uuid"
@@ -15,7 +15,7 @@ type BattleService struct {
 }
 
 func NewBattleService(db *mgo.Database) *BattleService {
-  return BattleService{
+  return &BattleService{
     db: db,
     Session: middlewares.NewSession(db),
   }
@@ -42,7 +42,7 @@ func (b *BattleService) Register(r *gin.RouterGroup) {
   g.GET("/example", b.Guest, b.Example)
 }
 
-func (b *BattleService) Example(c gin.Context) {
+func (b *BattleService) Example(c gin.HandlerFunc) {
   example := NewBattle("demouser1", "demouser2")
   c.JSON(http.StatusCreated, example)
 }
