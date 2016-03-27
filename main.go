@@ -23,6 +23,7 @@ func main() {
   v1 := router.Group("v1")
   services.Services{
     services.NewAccountService(db),
+    services.NewBattleService(db),
   }.Register(v1)
   log.Fatal(router.Run(address))
 }
