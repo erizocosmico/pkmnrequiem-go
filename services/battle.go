@@ -42,7 +42,7 @@ func (b *BattleService) Register(r *gin.RouterGroup) {
   g.GET("/example", b.Guest, b.Example)
 }
 
-func (b *BattleService) Example(c gin.HandlerFunc) {
+func (b *BattleService) Example(c *gin.Context) {
   example := NewBattle("demouser1", "demouser2")
   c.JSON(http.StatusCreated, example)
 }
