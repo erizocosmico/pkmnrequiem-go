@@ -44,7 +44,7 @@ func (b *BattleService) Register(r *gin.RouterGroup) {
 
 func (b *BattleService) Example(c *gin.Context) {
   example := NewBattle("demouser1", "demouser2")
-  c.JSON(http.StatusCreated, example)
+  c.IndentedJSON(http.StatusCreated, example)
 }
 
 func NewBattle(user1, user2 string) *Battle {
