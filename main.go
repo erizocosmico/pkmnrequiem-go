@@ -10,13 +10,13 @@ import (
 )
 
 var (
-	mongoDatabase = os.Getenv("MONGO_DB")
-	mongoURI      = os.Getenv("MONGO_URI")
-	address       = os.Getenv("RUN_ADDRESS")
+	bindAddress = os.Getenv("RUN_ADDRESS")
+	dbName      = os.Getenv("MONGO_DB")
+	dbURI       = os.Getenv("MONGO_URI")
 )
 
 func main() {
-	db, err := databaseConnection()
+	db, err := dbConnection()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -26,13 +26,13 @@ func main() {
 		services.NewAccountService(db),
 		services.NewBattleService(db),
 	}.Register(v1)
-	log.Fatal(router.Run(address))
+	log.Fatal(router.Run(bindAddress))
 }
 
-func databaseConnection() (*mgo.Database, error) {
-	session, err := mgo.Dial(mongoURI)
+func dbConnection() (*mgo.Database, error) {
+	session, err := mgo.Dial(dbURI)
 	if err != nil {
 		return nil, err
 	}
-	return session.DB(mongoDatabase), nil
+	return session.DB(dbName), nil
 }
