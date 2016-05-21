@@ -25,7 +25,6 @@ func NewBattleService(db *mgo.Database) *BattleService {
 
 type Battle struct {
 	ID                string       `json:"id"`
-	Attack_phase      bool         `json:"attack_phase"`
 	Current_pokemon_1 int          `json:"current_pokemon_1"`
 	Current_pokemon_2 int          `json:"current_pokemon_2"`
 	Finished          bool         `json:"finished"`
@@ -54,16 +53,11 @@ func NewBattle(username1, username2 string) *Battle {
 	user2 := models.NewUser("example@example.com", "12345", username2)
 	return &Battle{
 		ID:                uuid.NewV4().String(),
-		Attack_phase:      false,
-		Current_pokemon_1: 0,
-		Current_pokemon_2: 0,
-		Finished:          false,
 		Log:               []string{},
 		Party_1:           []string{},
 		Party_2:           []string{},
 		Position_1:        2,
 		Position_2:        22,
-		Turn:              0,
 		User_1:            user1,
 		User_2:            user2,
 	}

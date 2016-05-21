@@ -10,6 +10,7 @@ type User struct {
 	Badges   int    `json:"badges"`
 	ID       string `json:"id"`
 	Email    string `json:"email"`
+	Money    int    `json:"money"`
 	Password string `json:"password"`
 	Username string `json:"username"`
 }
@@ -31,6 +32,7 @@ func NewUser(email, password, username string) *User {
 		Badges:   0,
 		ID:       uuid.NewV4().String(),
 		Email:    email,
+		Money:    3000,
 		Password: string(encrypted),
 		Username: username,
 	}
