@@ -7,12 +7,15 @@ import (
 )
 
 type User struct {
-	Badges   int    `json:"badges"`
 	ID       string `json:"id"`
+	Badges   int    `json:"badges"`
+	Battles  []string `json:"battles"`
 	Email    string `json:"email"`
 	Money    int    `json:"money"`
+	// Party []Pokemon `json:"party"`
 	Password string `json:"password"`
 	Username string `json:"username"`
+	Verified bool `json:"verified"`
 }
 
 type UserStore struct {
@@ -24,17 +27,20 @@ func (s UserStore) ByToken(token string) (*User, error) {
 }
 
 func NewUser(email, password, username string) *User {
-	encrypted, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	encryptedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		panic(err)
 	}
 	user := &User{
-		Badges:   0,
 		ID:       uuid.NewV4().String(),
+		// Badges: 0,
+		// Battles: []string{},
 		Email:    email,
 		Money:    3000,
-		Password: string(encrypted),
+		// Party: []Pokemon{},
+		Password: string(encryptedPassword),
 		Username: username,
+		// Verified: false,
 	}
 	return user
 }

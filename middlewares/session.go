@@ -10,7 +10,6 @@ import (
 	"gopkg.in/mgo.v2"
 )
 
-// ...
 const (
 	AuthKey    = "Authorization"
 	TokenKey   = "session_token"
@@ -18,18 +17,15 @@ const (
 	UserKey    = "session_user"
 )
 
-// Session ...
 type Session struct {
 	db    *mgo.Database
 	store models.UserStore
 }
 
-// NewSession ...
 func NewSession(db *mgo.Database) *Session {
 	return &Session{db: db, store: models.UserStore{db}}
 }
 
-// Auth ...
 func (s *Session) Auth(c *gin.Context) {
 	token := retrieveToken(c)
 	if token == "" {
@@ -51,7 +47,6 @@ func (s *Session) Auth(c *gin.Context) {
 	c.Next()
 }
 
-// Guest ...
 func (s *Session) Guest(c *gin.Context) {
 	if retrieveToken(c) != "" {
 		c.AbortWithStatus(http.StatusUnauthorized)

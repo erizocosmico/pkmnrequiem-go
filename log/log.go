@@ -17,23 +17,22 @@ var (
 func init() {
 	if file == "" {
 		file = os.DevNull
-	} else {
-		fileWriter, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-		if err != nil {
-			panic(err)
-		}
-		remoteWriter := &papertrail.Writer{
-			Network: papertrail.UDP,
-			Port:    28644,
-			Server:  "logs4",
-		}
-		logging.SetFormatter(logging.MustStringFormatter(format))
-		fileBackend := logging.NewLogBackend(fileWriter, "", 0)
-		remoteBackend := logging.NewLogBackend(remoteWriter, "", 0)
-		stderrBackend := logging.NewLogBackend(os.Stderr, "", 0)
-		logging.SetBackend(fileBackend, remoteBackend, stderrBackend)
-		log = logging.MustGetLogger("pkmnrequiem-cluster")
 	}
+	fileWriter, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		panic(err)
+	}
+	remoteWriter := &papertrail.Writer{
+		Network: papertrail.UDP,
+		Port:    28644,
+		Server:  "logs4",
+	}
+	logging.SetFormatter(logging.MustStringFormatter(format))
+	fileBackend := logging.NewLogBackend(fileWriter, "", 0)
+	remoteBackend := logging.NewLogBackend(remoteWriter, "", 0)
+	stderrBackend := logging.NewLogBackend(os.Stderr, "", 0)
+	logging.SetBackend(fileBackend, remoteBackend, stderrBackend)
+	log = logging.MustGetLogger("pkmnrequiem-cluster")
 }
 
 func Critical(msg string, args ...interface{}) {

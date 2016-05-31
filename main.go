@@ -38,6 +38,7 @@ func dbConnection() (*mgo.Database, error) {
 	if err != nil {
 		return nil, err
 	}
+	session.SetMode(mgo.Monotonic, true)
 	log.Debug("Base de datos conectada (%.2fms)", time.Since(start).Seconds()*1000)
 	return session.DB(dbName), nil
 }

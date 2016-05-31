@@ -9,14 +9,12 @@ import (
 	"gopkg.in/mgo.v2"
 )
 
-// AccountService ...
 type AccountService struct {
 	*middlewares.Session
 	collection *mgo.Collection
 	store      *models.UserStore
 }
 
-// NewAccountService ...
 func NewAccountService(db *mgo.Database) *AccountService {
 	return &AccountService{
 		collection: db.C("account"),
@@ -25,7 +23,6 @@ func NewAccountService(db *mgo.Database) *AccountService {
 	}
 }
 
-// Register ...
 func (a *AccountService) Register(r *gin.RouterGroup) {
 	group := r.Group("/account")
 	group.POST("/create", a.Guest, a.Create)
@@ -33,7 +30,6 @@ func (a *AccountService) Register(r *gin.RouterGroup) {
 	// group.POST("/logout", a.Auth, a.Logout)
 }
 
-// Create ...
 func (a *AccountService) Create(c *gin.Context) {
 	var form CreateAccountForm
 	if err := c.BindJSON(&form); err != nil {
@@ -43,7 +39,6 @@ func (a *AccountService) Create(c *gin.Context) {
 	c.JSON(http.StatusOK, form)
 }
 
-// CreateAccountForm ...
 type CreateAccountForm struct {
 	Email    string `binding:"email,required" json:"email"`
 	Password string `binding:"min=8,required" json:"password"`
