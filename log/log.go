@@ -1,7 +1,6 @@
 package log
 
 import (
-	"io"
 	"os"
 
 	"github.com/op/go-logging"
@@ -32,7 +31,7 @@ func init() {
 		fileBackend := logging.NewLogBackend(fileWriter, "", 0)
 		remoteBackend := logging.NewLogBackend(remoteWriter, "", 0)
 		stderrBackend := logging.NewLogBackend(os.Stderr, "", 0)
-		logging.setBackend(fileBackend, remoteWriter, stderrBackend)
+		logging.SetBackend(fileBackend, remoteBackend, stderrBackend)
 		log = logging.MustGetLogger("pkmnrequiem-cluster")
 	}
 }
@@ -47,6 +46,10 @@ func Debug(msg string, args ...interface{}) {
 
 func Error(msg string, args ...interface{}) {
 	log.Errorf(msg, args...)
+}
+
+func Fatal(err error) {
+	log.Error(err.Error())
 }
 
 func Info(msg string, args ...interface{}) {

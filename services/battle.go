@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jrevillas/pkmnrequiem-go/log"
 	"github.com/jrevillas/pkmnrequiem-go/middlewares"
 	"github.com/jrevillas/pkmnrequiem-go/models"
-	"github.com/op/go-logging"
 	"github.com/satori/go.uuid"
 	"gopkg.in/mgo.v2"
 )
@@ -15,13 +15,11 @@ import (
 type BattleService struct {
 	*middlewares.Session
 	db *mgo.Database
-	log *logging.Logger
 }
 
-func NewBattleService(db *mgo.Database, log *logging.Logger) *BattleService {
+func NewBattleService(db *mgo.Database) *BattleService {
 	return &BattleService{
 		db:      db,
-		log:     log,
 		Session: middlewares.NewSession(db),
 	}
 }
@@ -50,7 +48,7 @@ func (b *BattleService) Example(c *gin.Context) {
 	start := time.Now()
 	example := NewBattle("demouser1", "demouser2")
 	c.IndentedJSON(http.StatusCreated, example)
-	b.log.Debugf("Batalla de ejemplo generada (%.2fms)", time.Since(start).Seconds()*1000)
+	log.Debug("Batalla de ejemplo generada (%.2fms)", time.Since(start).Seconds()*1000)
 }
 
 func NewBattle(username1, username2 string) *Battle {
