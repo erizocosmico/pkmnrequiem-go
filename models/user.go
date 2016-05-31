@@ -7,15 +7,15 @@ import (
 )
 
 type User struct {
-	ID       string `json:"id"`
-	Badges   int    `json:"badges"`
-	Battles  []string `json:"battles"`
-	Email    string `json:"email"`
-	Money    int    `json:"money"`
+	ID      string   `json:"id"`
+	Badges  int      `json:"badges"`
+	Battles []string `json:"battles"`
+	Email   string   `json:"email"`
+	Money   int      `json:"money"`
 	// Party []Pokemon `json:"party"`
 	Password string `json:"password"`
 	Username string `json:"username"`
-	Verified bool `json:"verified"`
+	Verified bool   `json:"verified"`
 }
 
 type UserStore struct {
@@ -32,11 +32,11 @@ func NewUser(email, password, username string) *User {
 		panic(err)
 	}
 	user := &User{
-		ID:       uuid.NewV4().String(),
+		ID: uuid.NewV4().String(),
 		// Badges: 0,
 		// Battles: []string{},
-		Email:    email,
-		Money:    3000,
+		Email: email,
+		Money: 3000,
 		// Party: []Pokemon{},
 		Password: string(encryptedPassword),
 		Username: username,

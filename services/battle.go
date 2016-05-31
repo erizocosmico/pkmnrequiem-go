@@ -76,13 +76,13 @@ func NewExampleBattle() *Battle {
 	user2 := models.NewUser("example@example.com", "12345", "demouser2")
 	log.Debug("Usuario temporal '%s' generado (%.2fms)", user2.Username, time.Since(start).Seconds()*1000)
 	return &Battle{
-		ID:                uuid.NewV4().String(),
-		Log:               []string{},
-		Party_1:           []string{},
-		Party_2:           []string{},
-		Position_1:        2,
-		Position_2:        22,
-		User_1:            user1,
-		User_2:            user2,
+		ID:         uuid.NewV4().String(),
+		Log:        []string{},
+		Party_1:    []string{},
+		Party_2:    []string{},
+		Position_1: 2,
+		Position_2: 22,
+		User_1:     user1,
+		User_2:     user2,
 	}
 }
