@@ -48,7 +48,7 @@ func Error(msg string, args ...interface{}) {
 }
 
 func Fatal(err error) {
-	log.Error(err.Error())
+	log.Fatal(err.Error())
 }
 
 func Info(msg string, args ...interface{}) {
