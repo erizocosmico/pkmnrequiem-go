@@ -32,13 +32,13 @@ func main() {
 }
 
 func dbConnection() (*mgo.Database, error) {
-	log.Debug("Conectando con la base de datos...")
+	log.Debug("Establishing database connection...")
 	start := time.Now()
 	session, err := mgo.Dial(dbURI)
 	if err != nil {
 		return nil, err
 	}
 	session.SetMode(mgo.Monotonic, true)
-	log.Debug("Base de datos conectada (%.2fms)", time.Since(start).Seconds()*1000)
+	log.Debug("Connected to the database (%.2fms)", time.Since(start).Seconds()*1000)
 	return session.DB(dbName), nil
 }
